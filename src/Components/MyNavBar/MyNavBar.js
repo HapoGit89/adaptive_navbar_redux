@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import { Link as LinkBase } from '@mui/material';
 
 const drawerWidth = 240;
-const navItems = ['Über', 'Live', 'Studio', 'Kooperationen', 'Kontakt'];
+const navItems = ['Home', 'Live', 'Studio', 'Cooperation', 'Contact'];
 
 function MyNavBar(props) {
   const { window } = props;
@@ -31,14 +31,14 @@ function MyNavBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' , color: "white", backgroundColor: "black"}}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Stulz
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-            <LinkBase component={Link} to={`/${item}`} sx={{color: "white"}} underline="none">
+            <LinkBase component={Link} to={`/${item.toLowerCase()}`} sx={{color: "white"}} underline="none">
               {item}
             </LinkBase>
           
@@ -75,15 +75,17 @@ function MyNavBar(props) {
           <Box sx={{ display: { xs: 'none', sm: 'flex', md: "flex", lg: "flex", xl: "flex"} , justifyContent: "space-between" , width: "80vw"}}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
-                   <LinkBase component={Link} to={`/${item}`} sx={{color: "white"}} underline="none">
+                   <LinkBase component={Link} to={`/${item.toLowerCase()}`} sx={{color: "white"}} underline="none">
               {item}
             </LinkBase>
               </Button>
             ))}
           </Box>
           <Box sx={{width: "20vw"}}>
-          <Button variant="outlined" sx={{ display: { xs: 'none', sm: 'block', md: "block", lg: "block", xl: "block"}, color: 'white', borderStyle: "solid", borderColor: "white",  marginLeft:"10vw"}}>
-                 Media
+          <Button variant="outlined" sx={{ display: { xs: 'none', sm: 'block', md: "block", lg: "block", xl: "block"}, color: 'white', borderStyle: "solid", borderColor: "blueviolet",  marginLeft:"10vw"}}>
+          <LinkBase component={Link} to={`/media`} sx={{color: "white"}} underline="none">
+              Media
+            </LinkBase>
               </Button>
               </Box>
         </Toolbar>
