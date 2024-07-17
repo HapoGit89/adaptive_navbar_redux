@@ -1,4 +1,14 @@
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+
 const Media = () => {
+        const dispatch = useDispatch()
+
+        // change Redux store for navbar conditional rendering
+        useEffect(() => {
+            dispatch({type: "CHANGE", payload: {page: "Media"}})
+          }, []);
+         
     return (
         <>
         <div className="Main">

@@ -2,7 +2,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -16,11 +15,25 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { Link as LinkBase } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { click } from '@testing-library/user-event/dist/click';
 
+
+
+
+// Navbar Code from MUI modified for my needs
 const drawerWidth = 240;
 const navItems = ['Home', 'Live', 'Studio', 'Cooperation', 'Contact'];
 
 function MyNavBar(props) {
+  // get page from Redux store
+  const page = useSelector(store=>store.page)
+
+  console.log(page)
+  
+
+
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -59,6 +72,7 @@ function MyNavBar(props) {
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
+  if (page != "Media"){
   return (
     <Box sx={{ display: 'flex'}}>
       <AppBar component="nav">
@@ -74,19 +88,18 @@ function MyNavBar(props) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'flex', md: "flex", lg: "flex", xl: "flex"} , justifyContent: "space-between" , width: "80vw"}}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                   <LinkBase component={Link} to={`/${item.toLowerCase()}`} sx={{color: "white"}} underline="none">
-              {item}
+                   <LinkBase key={item} component={Link} to={`/${item.toLowerCase()}`} sx={{color: "white"}} underline="none">
+               <Button key={item} sx={{ color: '#fff' }}>{item}</Button>
             </LinkBase>
-              </Button>
             ))}
           </Box>
           <Box sx={{width: "20vw"}}>
+          
+          <LinkBase component={Link} to={`/media`} sx={{color: "white", display:"block", width: "100%", height: "100%"}} underline="none">
           <Button variant="outlined" sx={{ display: { xs: 'none', sm: 'block', md: "block", lg: "block", xl: "block"}, color: 'white', borderStyle: "solid", borderColor: "blueviolet",  marginLeft:"10vw"}}>
-          <LinkBase component={Link} to={`/media`} sx={{color: "white"}} underline="none">
               Media
-            </LinkBase>
               </Button>
+            </LinkBase>
               </Box>
         </Toolbar>
       </AppBar>
@@ -111,6 +124,59 @@ function MyNavBar(props) {
         <Toolbar />
     </Box>
   );
+}
+else return (
+  <Box sx={{ display: 'flex'}}>
+  <AppBar component="nav">
+    <Toolbar sx={{backgroundColor: "white",}}>
+      <IconButton
+        color="black"
+        aria-label="open drawer"
+        edge="start"
+        onClick={handleDrawerToggle}
+        sx={{ mr: 2, display: { sm: 'none' } }}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Box sx={{ display: { xs: 'none', sm: 'flex', md: "flex", lg: "flex", xl: "flex"} , justifyContent: "space-between" , width: "80vw"}}>
+        {navItems.map((item) => (
+               <LinkBase key={item} component={Link} to={`/${item.toLowerCase()}`} sx={{color: "black"}} underline="none">
+           <Button key={item} sx={{ color: "black" }}>{item}</Button>
+        </LinkBase>
+        ))}
+      </Box>
+      <Box sx={{width: "20vw"}}>
+      
+      <LinkBase component={Link} to={`/media`} sx={{color: "white", display:"block", width: "100%", height: "100%"}} underline="none">
+      <Button variant="outlined" sx={{ display: { xs: 'none', sm: 'block', md: "block", lg: "block", xl: "block"}, color: 'black', borderStyle: "solid", borderColor: "blueviolet",  marginLeft:"10vw"}}>
+          Media
+          </Button>
+        </LinkBase>
+          </Box>
+    </Toolbar>
+  </AppBar>
+  <nav>
+    <Drawer
+      container={container}
+      variant="temporary"
+      open={mobileOpen}
+      onClose={handleDrawerToggle}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
+      sx={{
+        display: { xs: 'block', sm: 'none' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+      }}
+    >
+      {drawer}
+    </Drawer>
+  </nav>
+ 
+    <Toolbar />
+</Box>
+
+)
 }
 
 MyNavBar.propTypes = {

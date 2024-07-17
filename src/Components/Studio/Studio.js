@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 const Studio = () => {
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch({type: "CHANGE", payload: {page: "Studio"}})
+      }, []);
     return (
         <>
         <div className="Main">

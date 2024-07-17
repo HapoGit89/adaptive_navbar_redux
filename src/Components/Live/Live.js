@@ -1,6 +1,14 @@
 import './Live.css'
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 const Live = () => {
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch({type: "CHANGE", payload: {page: "Live"}})
+      }, []);
+
     return (
         <>
         <div className="Main">
