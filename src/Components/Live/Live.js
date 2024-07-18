@@ -1,12 +1,13 @@
 import './Live.css'
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { changePage } from '../../actions';
 
 const Live = () => {
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch({type: "CHANGE", payload: {page: "Live"}})
+        dispatch(changePage("Live"))
       }, []);
 
     return (

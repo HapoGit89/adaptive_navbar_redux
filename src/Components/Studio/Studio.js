@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { changePage } from "../../actions";
+import './Studio.css'
 
 const Studio = () => {
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch({type: "CHANGE", payload: {page: "Studio"}})
+        dispatch(changePage("Studio"))
       }, []);
     return (
         <>

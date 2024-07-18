@@ -1,14 +1,15 @@
 import './Coops.css'
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { changePage } from '../../actions';
 
 const Coops = () => {
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch({type: "CHANGE", payload: {page: "Coops"}})
+        dispatch(changePage("Coops"))
       }, []);
-      
+
     return (
         <div className="Main">
             <h1>This is Coops</h1>

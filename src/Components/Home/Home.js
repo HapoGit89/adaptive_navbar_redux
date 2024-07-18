@@ -1,5 +1,17 @@
+import { useDispatch } from 'react-redux';
 import './Home.css'
+import { useEffect } from 'react';
+import { changePage } from '../../actions';
+
+
 const Home = () => {
+    const dispatch = useDispatch()
+    
+    // change Redux store after component renders for navbar conditional rendering
+    useEffect(() => {
+        dispatch(changePage("Home"))
+      }, []);
+
     return (
         <>
         <div className="Main">

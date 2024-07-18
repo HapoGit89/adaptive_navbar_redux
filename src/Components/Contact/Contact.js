@@ -1,13 +1,15 @@
 import './Contact.css'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { changePage } from '../../actions';
 
 const Contact = () => {
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch({type: "CHANGE", payload: {page: "Contact"}})
+        dispatch(changePage("Contact"))
       }, []);
+      
     return (
         <div className="Main">
             <h1>This is Contact</h1>

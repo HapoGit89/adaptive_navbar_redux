@@ -8,32 +8,24 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { Link as LinkBase } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { click } from '@testing-library/user-event/dist/click';
-
-
+import { useSelector, shallowEqual} from 'react-redux';
 
 
 // Navbar Code from MUI modified for my needs
+
 const drawerWidth = 240;
 const navItems = ['Home', 'Live', 'Studio', 'Cooperation', 'Contact'];
 
 function MyNavBar(props) {
   // get page from Redux store
-  const page = useSelector(store=>store.page)
-
-  console.log(page)
+  const page = useSelector(store=>store.page, shallowEqual)
   
-
-
-
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -41,8 +33,14 @@ function MyNavBar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  // define style object for conditional Drawer sx
+ const drawer1 = { textAlign: 'center' , color: "white", backgroundColor: "black"}
+ const drawer2 = { textAlign: 'center' , color: "black", backgroundColor: "white"}
+ const linkbase1 = {color: "black"}
+ const linkbase2 = {color: "white"}
+
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' , color: "white", backgroundColor: "black"}}>
+    <Box onClick={handleDrawerToggle} sx={(page == "Media" || page == "Coops" || page == "Live") ? drawer2 : drawer1}>
       <Typography variant="h6" sx={{ my: 2 }}>
         Stulz
       </Typography>
@@ -51,7 +49,7 @@ function MyNavBar(props) {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-            <LinkBase component={Link} to={`/${item.toLowerCase()}`} sx={{color: "white"}} underline="none">
+            <LinkBase component={Link} to={`/${item.toLowerCase()}`} sx={(page == "Media" || page == "Coops" || page == "Live") ? linkbase1 : linkbase2} underline="none">
               {item}
             </LinkBase>
           
@@ -61,7 +59,7 @@ function MyNavBar(props) {
         <ListItem key="Media" disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               
-            <LinkBase component={Link} to={`/media`} sx={{color: "white"}} underline="none">
+            <LinkBase component={Link} to={`/media`} sx={(page == "Media" || page == "Coops" || page == "Live") ? linkbase1 : linkbase2} underline="none">
               Media
             </LinkBase>
             </ListItemButton>
@@ -72,7 +70,7 @@ function MyNavBar(props) {
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
-  if (page != "Media"){
+  if (page != "Media" && page!= "Coops" && page != "Live"){
   return (
     <Box sx={{ display: 'flex'}}>
       <AppBar component="nav">
