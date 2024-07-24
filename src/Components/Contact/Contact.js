@@ -5,7 +5,7 @@ import { changePage } from '../../actions';
 
 const Contact = () => {
     const dispatch = useDispatch()
-    
+    // change Redux store after component renders for navbar conditional rendering
     useEffect(() => {
         dispatch(changePage("Contact"))
       }, []);

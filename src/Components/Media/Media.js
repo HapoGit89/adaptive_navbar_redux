@@ -5,7 +5,7 @@ import './Media.css'
 
 const Media = () => {
         const dispatch = useDispatch()
-        
+            // change Redux store after component renders for navbar conditional rendering
         useEffect(() => {
             dispatch(changePage("Media"))
           }, []);
